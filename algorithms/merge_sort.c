@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-// merge sort (n log n)
+// merge sort O(n log n)
 
 void merge(int arr[], int left, int mid, int right) {
     int n1 = mid - left + 1;
