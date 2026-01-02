@@ -1,4 +1,6 @@
-### ⚙️ Data structures and algorithms implemented by me from scratch [Educational purposes]
+# Data Structures and Algorithms from Scratch
+
+Educational implementations of algorithms and data structures.⚙️
 
 ## Algorithms
 
