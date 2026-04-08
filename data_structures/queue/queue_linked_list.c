@@ -22,7 +22,7 @@ struct LinkedList* enqueue(struct LinkedList *linked_list, int value) {
 
     if (linked_list == NULL) {
 
-        struct LinkedList *linked_list = malloc(sizeof(struct LinkedList));
+        linked_list = malloc(sizeof(struct LinkedList));
 
         linked_list->front = new_node;
         linked_list->rear = new_node;
@@ -37,34 +37,42 @@ struct LinkedList* enqueue(struct LinkedList *linked_list, int value) {
 
 }
 
-struct LinkedList* dequeue(struct LinkedList *linked_list) {
+int dequeue(struct LinkedList *linked_list) {
+
     if (linked_list == NULL) {
         printf("Nothing to dequeue: list is empty.\n");
-        exit(1);
+        return -1;
+    }
+    if (linked_list->front == NULL) {
+        printf("Nothing to dequeue: list is empty.\n");
+        return -1;
     }
 
     struct Node *new_front = linked_list->front->next;
-    free(linked_list->front);
+    struct Node *node_to_delete = linked_list->front;
+    free(node_to_delete);
+
     if (new_front == NULL) {
         printf("Las element dequeued: Queue is empty.\n");
         linked_list->rear = NULL;
         linked_list->front = NULL;
         
-        return linked_list;
+        return 0;
     }
     linked_list->front = new_front;
 
-    return linked_list;
+    return 0;
 }
 
-int peek(struct LinkedList *linked_list) {
+int peek(struct LinkedList *linked_list, int *value) {
+
     if (linked_list->front == NULL) {
         printf("Queue is empty.\n");
-        exit(1);
+        return -1;
     }
-    int first_in = linked_list->front->value;
+    *value = linked_list->front->value;
 
-    return first_in;
+    return 0;
 }
 
 void is_empty(struct LinkedList *linked_list) {
@@ -87,18 +95,19 @@ int main() {
     linked_list = enqueue(linked_list, 15);
 
     // dequeue one element
-    linked_list = dequeue(linked_list);
+    dequeue(linked_list);
 
     // take first added element
-    int first_in = peek(linked_list);
+    int first_in = 0;
+    peek(linked_list, &first_in);
     printf("First added: %d\n", first_in);
 
     // verify status. expected: "Queue has elements."
     is_empty(linked_list);
 
     // dequeue the last two elements
-    linked_list = dequeue(linked_list);
-    linked_list = dequeue(linked_list);
+    dequeue(linked_list);
+    dequeue(linked_list);
 
     // verify status. expected: "Queue is empty."
     is_empty(linked_list);
