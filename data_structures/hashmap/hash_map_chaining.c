@@ -25,7 +25,7 @@ int hash(char* key) {
     return sum % TABLE_SIZE;
 }
 
-void insert(char* key, int value) {
+int insert(char* key, int value) {
     int index = hash(key);
 
     struct Node* new_node = malloc(sizeof(struct Node));
@@ -33,12 +33,14 @@ void insert(char* key, int value) {
 
     if (!new_node->key) {
         perror("strdup failed");
-        exit(1);
+        return -1;
     }
     new_node->value = value;
 
     new_node->next = hash_table[index];
     hash_table[index] = new_node;
+
+    return 0;
 }
 
 int search(char* key) {
