@@ -30,7 +30,7 @@ int hash(char *key) {
     return sum % TABLE_SIZE;
 }
 
-void insert(char* key, int value) {
+int insert(char* key, int value) {
     int index = hash(key);
     int original_index = index;
 
@@ -39,7 +39,7 @@ void insert(char* key, int value) {
 
         if (index == original_index) {
             printf("Table is full, couldn't insert\n");
-            return;
+            return -1;
         }
     }
 
@@ -47,10 +47,12 @@ void insert(char* key, int value) {
         
     if (!hash_table[index].key) {
         perror("strdup failed");
-        exit(1);
+        return -1;
     }
     hash_table[index].value = value;
     hash_table[index].is_occupied = 1;
+
+    return 0;
 }
 
 int search(char* key) {
