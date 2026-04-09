@@ -17,7 +17,7 @@ struct Graph {
 struct Graph* add_node(struct Graph *graph, int value) {
 
     if (graph == NULL) {
-        struct Graph *new_graph = malloc(sizeof(struct Graph));
+        struct Graph *new_graph = calloc(1, sizeof(struct Graph));
 
         new_graph->total_nodes = 1;
         new_graph->matrix[0][0] = 0;
@@ -75,7 +75,7 @@ void print_graph(struct Graph *graph) { // O(n)
     }
 }
 
-int get_by_index(struct Graph *graph, int index) {
+int get_by_index(struct Graph *graph, int index, int *value) {
     if (index < 0 || index >= graph->total_nodes) {
         printf("Out of index.\n");
         return -1;
@@ -85,11 +85,12 @@ int get_by_index(struct Graph *graph, int index) {
         return -1;
     }
     else {
-        return graph->nodes[index]->value;
+        *value = graph->nodes[index]->value; // retornar puntero aca
+        return 0;
     }
 }
 
-struct Graph* remove_node(struct Graph *graph, int index) { // O(n)
+void remove_node(struct Graph *graph, int index) { // O(n)
     /*
     Disconnect from all nodes
     */
@@ -124,7 +125,8 @@ int main() {
 
     disconnect(graph, 1, 2);
     
-    int value = get_by_index(graph, 3);
+    int value = 0;
+    get_by_index(graph, 3, &value);
     printf("Value obtanied: %d\n", value);
 
     remove_node(graph, 2);
