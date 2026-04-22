@@ -67,17 +67,20 @@ void free_tree(struct Node *root) {
     free(root);
 }
 
-int get_value(struct Node *root, int value) {
+int get_value(struct Node *root, int value_to_search, int *store_value) {
 
     if (root == NULL) return -1;
 
-    if (root->value == value) return root->value;
+    if (root->value == value_to_search) {
+        *store_value = root->value;
+        return 0;
+    }
 
-    if (value < root->value) {
-        return get_value(root->left, value);
+    if (value_to_search < root->value) {
+        return get_value(root->left, value_to_search, store_value);
     } 
-    else if (value > root->value) {
-        return get_value(root->right, value);
+    else if (value_to_search > root->value) {
+        return get_value(root->right, value_to_search, store_value);
     }
     return -1;
 }
@@ -158,7 +161,8 @@ int main() {
      ...    ...
     */
 
-    int value = get_value(root, 24);
+    int value = 0;
+    get_value(root, 24, &value);
     printf("Obtained value: %d\n", value);
 
     root = delete_value(root, 12);
