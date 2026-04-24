@@ -4,7 +4,7 @@
 
 // binary search O(log n)
 
-int binary_search(int arr[], int n, int target) {
+int binary_search(int arr[], int n, int target, int *idx) {
     int left = 0;
     int right = n - 1;
 
@@ -12,7 +12,8 @@ int binary_search(int arr[], int n, int target) {
         int mid = left + (right - left) / 2;
 
         if (arr[mid] == target) {
-            return mid;
+            *idx = mid;
+            return 0;   
         }
         else if (arr[mid] < target) {
             left = mid + 1;
@@ -29,9 +30,10 @@ int main() {
     int arr[] = {2, 5, 8, 12, 15, 20, 25};
     int n = sizeof(arr) / sizeof(arr[0]);
     int target = 15;
+    int idx = 0;
 
-    int idx = binary_search(arr, n, target);
-    if (idx != -1) {
+    int result = binary_search(arr, n, target, &idx);
+    if (result != -1) {
         printf("Element %d found at index %d.\n", target, idx);
     }
     else {
