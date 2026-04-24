@@ -85,7 +85,7 @@ int get_by_index(struct Graph *graph, int index, int *value) {
         return -1;
     }
     else {
-        *value = graph->nodes[index]->value; // retornar puntero aca
+        *value = graph->nodes[index]->value;
         return 0;
     }
 }
