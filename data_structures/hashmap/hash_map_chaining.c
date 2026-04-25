@@ -43,13 +43,14 @@ int insert(char* key, int value) {
     return 0;
 }
 
-int search(char* key) {
+int search(char* key, int *value) {
     int index = hash(key);
     struct Node *current = hash_table[index];
 
     while (current != NULL) {
         if (strcmp(current->key, key) == 0) {
-            return current->value;
+            *value = current->value;
+            return 0;
         }
         current = current->next;
     }
@@ -107,8 +108,14 @@ int main() {
 
     print_table();
 
-    printf("'Luis' value: %d\n", search("Luis"));
-    printf("'Pedro' value: %d\n", search("Pedro"));
+    int luis_value = 0;
+    search("Luis", &luis_value);
+
+    int pedro_value = 0;
+    search("Pedro", &pedro_value);
+
+    printf("'Luis' value: %d\n", luis_value);
+    printf("'Pedro' value: %d\n", pedro_value);
 
     printf("\nDeleting 'Juan'...\n");
     delete("Juan");
