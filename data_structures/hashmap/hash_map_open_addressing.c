@@ -55,13 +55,14 @@ int insert(char* key, int value) {
     return 0;
 }
 
-int search(char* key) {
+int search(char* key, int *value) {
     int index = hash(key);
     int original_index = index;
 
     while (hash_table[index].is_occupied != 0) {
         if (hash_table[index].is_occupied == 1 && strcmp(hash_table[index].key, key) == 0) {
-            return hash_table[index].value;
+            *value = hash_table[index].value;
+            return 0;
         }
 
         index = (index + 1) % TABLE_SIZE; // linear probing
@@ -117,7 +118,10 @@ int main() {
 
     print_table();
 
-    printf("Searching 'Juan': %d\n", search("Juan"));
+    int juan_value = 0;
+    search("Juan", &juan_value);
+
+    printf("Searching 'Juan': %d\n", juan_value);
     printf("Deleting 'Juan'...\n");
     delete("Juan");
 
