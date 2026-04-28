@@ -16,20 +16,24 @@ void push(int element) {
     }
 }
 
-int pop() {
+int pop(int *last_element) {
     if (top >= 0) {
-        int last_element = stack[top];
+        *last_element = stack[top];
         top = top - 1;
-        return last_element;
-    } else {
+
+        return 0;
+    } 
+    else {
         printf("Couldn't pop element: the stack is empty.\n");
         return -1; // return -1 only for return an int
     }
 }
 
-int peek() {
+int peek(int *last_element) {
     if (top >= 0) {
-        return stack[top];
+        *last_element = stack[top];
+
+        return 0;
     }
     printf("The stack is empty.\n");
     return -1; // return -1 only for return an int
@@ -67,21 +71,26 @@ int main() {
     push(15);
 
     // get the last
-    int last_element = peek();
-    printf("Last element: %d.\n", last_element);
+    int peek_last_element = 0;
+    peek(&peek_last_element);
+    printf("Last element: %d.\n", peek_last_element);
 
     // show elements
     print_stack();
 
     // pop 2 elments (1 remaining)
-    pop();
-    pop();
+    int pop_last_element1 = 0;
+    pop(&pop_last_element1);
+
+    int pop_last_element2 = 0;
+    pop(&pop_last_element2);
 
     // verify status (must be "The stack has elements.")
     is_empty();
 
     // pop last element
-    pop();
+    int pop_last_element3 = 0;
+    pop(&pop_last_element3);
 
     // verify status (must be "The stack is empty.")
     is_empty();
