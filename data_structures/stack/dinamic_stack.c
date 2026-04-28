@@ -37,12 +37,14 @@ struct Node* pop(struct Node *head) {
     return prev;
 }
 
-int peek(struct Node *head) {
+int peek(struct Node *head, int *value) {
     if (head == NULL) {
         printf("The stack is empty.\n");
-        exit(1);
+        return -1;
     }
-    return head->value;
+    *value = head->value;
+
+    return 0;
 }
 
 void is_empty(struct Node *head) {
@@ -86,7 +88,8 @@ int main() {
     is_empty(head);
 
     // get the last
-    int peek_last = peek(head);
+    int value = 0;
+    int peek_last = peek(head, &value);
     printf("Last element: %d\n", peek_last);
 
     // pop last 2 elements remaining
