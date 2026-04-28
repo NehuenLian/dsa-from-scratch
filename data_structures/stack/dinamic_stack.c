@@ -25,16 +25,16 @@ struct Node* push(struct Node *head, int value) {
     return new_node;
 }
 
-struct Node* pop(struct Node *head) {
+int pop(struct Node **head) {
     if (head == NULL) {
         printf("Couldn't pop element: the stack is empty.\n");
-        exit(1);
+        return -1;
     }
 
-    struct Node *prev = head->next;
+    struct Node *prev = (*head)->next;
     free(head);
 
-    return prev;
+    return 0;
 }
 
 int peek(struct Node *head, int *value) {
@@ -77,7 +77,7 @@ int main() {
     /*
     Out: 15 -> 10 -> 5 -> NULL
     */
-    head = pop(head);
+    pop(&head);
 
     print_stack(head);
     /*
@@ -93,8 +93,8 @@ int main() {
     printf("Last element: %d\n", peek_last);
 
     // pop last 2 elements remaining
-    head = pop(head);
-    head = pop(head);
+    pop(&head);
+    pop(&head);
 
     // verify status (must be "The stack is empty.")
     is_empty(head);
