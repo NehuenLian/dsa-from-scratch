@@ -6,10 +6,10 @@
 
 // forward declarations
 struct Node* balance(struct Node *root);
-struct Node* RR(struct Node *root);
-struct Node* LL(struct Node *root);
-struct Node* RL(struct Node *root);
-struct Node* LR(struct Node *root);
+struct Node* rotate_right(struct Node *root);
+struct Node* rotate_left(struct Node *root);
+struct Node* rotate_right_left(struct Node *root);
+struct Node* rotate_left_right(struct Node *root);
 //
 
 struct Node {
@@ -126,18 +126,18 @@ struct Node* balance(struct Node *root) {
 
     if (factor >= 2) {
         if (height(root->left->left) >= height(root->left->right)) {
-            root = RR(root);
+            root = rotate_right(root);
         } 
         else {
-            root = LR(root);
+            root = rotate_left_right(root);
         }
 
     } else if (factor <= -2) {
         if (height(root->right->right) >= height(root->right->left)) {
-            root = LL(root);
+            root = rotate_left(root);
         } 
         else {
-            root = RL(root);
+            root = rotate_right_left(root);
         }
     }
     return root;
@@ -166,7 +166,7 @@ int compute_height(struct Node *node) {
 ====================== Rotations
 */
 
-struct Node* RR(struct Node *root) {
+struct Node* rotate_right(struct Node *root) {
 
     struct Node *root_left = root->left;
     struct Node *root_left_right = root_left->right;
@@ -199,7 +199,7 @@ struct Node* RR(struct Node *root) {
     return root_left;
 }
 
-struct Node* LL(struct Node *root) {
+struct Node* rotate_left(struct Node *root) {
 
     struct Node *root_right = root->right;
     struct Node *root_right_left = root_right->left;
@@ -230,16 +230,16 @@ struct Node* LL(struct Node *root) {
     return root_right;
 }
 
-struct Node* RL(struct Node *root) {
-    root->right = RR(root->right);
-    root = LL(root);
+struct Node* rotate_right_left(struct Node *root) {
+    root->right = rotate_right(root->right);
+    root = rotate_left(root);
 
     return root;
 }
 
-struct Node* LR(struct Node *root) {
-    root->left = LL(root->left);
-    root = RR(root);
+struct Node* rotate_left_right(struct Node *root) {
+    root->left = rotate_left(root->left);
+    root = rotate_right(root);
 
     return root;
 }
