@@ -75,8 +75,7 @@ void remove_node(struct Graph *graph, int source, int destiny) {
 
     if (prev == NULL) {
         graph->list[source].head = temp->next;
-    }
-    else {
+    } else {
         prev->next = temp->next;
     }
     free(temp);

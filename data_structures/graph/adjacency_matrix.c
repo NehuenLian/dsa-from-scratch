@@ -40,8 +40,7 @@ struct Graph* add_node(struct Graph *graph, int value) {
         graph->nodes[node_index] = new_node;
 
         return graph;
-    }
-    else {
+    } else {
         printf("Error adding a node: matrix is full.\n");
         return graph; // return struct Graph *graph = NULL;
     }
@@ -51,8 +50,7 @@ struct Graph* add_node(struct Graph *graph, int value) {
 void connect(struct Graph *graph, int index1, int index2) { // O(1)
     if (graph->nodes[index1] != NULL && graph->nodes[index2] != NULL) {
         graph->matrix[index1][index2] = 1;
-    }
-    else {
+    } else {
         printf("There is no node in index.\n");
     }
 }
@@ -60,8 +58,7 @@ void connect(struct Graph *graph, int index1, int index2) { // O(1)
 void disconnect(struct Graph *graph, int index1, int index2) { // O(1)
     if (graph->nodes[index1] != NULL && graph->nodes[index2] != NULL) {
         graph->matrix[index1][index2] = 0;
-    }
-    else {
+    } else {
         printf("There is no node in index.\n");
     }
 }
@@ -79,12 +76,10 @@ int get_by_index(struct Graph *graph, int index, int *value) {
     if (index < 0 || index >= graph->total_nodes) {
         printf("Out of index.\n");
         return -1;
-    }
-    else if (graph->nodes[index] == NULL) {
+    } else if (graph->nodes[index] == NULL) {
         printf("Non existent node at index %d\n.", index);
         return -1;
-    }
-    else {
+    } else {
         *value = graph->nodes[index]->value;
         return 0;
     }
