@@ -14,11 +14,9 @@ int binary_search(int arr[], int n, int target, int *idx) {
         if (arr[mid] == target) {
             *idx = mid;
             return 0;   
-        }
-        else if (arr[mid] < target) {
+        } else if (arr[mid] < target) {
             left = mid + 1;
-        }
-        else {
+        } else {
             right = mid - 1;
         }
     }
@@ -35,8 +33,7 @@ int main() {
     int result = binary_search(arr, n, target, &idx);
     if (result != -1) {
         printf("Element %d found at index %d.\n", target, idx);
-    }
-    else {
+    } else {
         printf("Element %d not found.\n", target);
     }
     /*
