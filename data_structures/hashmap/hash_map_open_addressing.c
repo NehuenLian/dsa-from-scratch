@@ -99,11 +99,9 @@ void print_table() {
 
         if (hash_table[i].is_occupied == 1) {
             printf("%d: (%s,%d)", i, hash_table[i].key, hash_table[i].value);
-        }
-        else if (hash_table[i].is_occupied == 2) {
+        } else if (hash_table[i].is_occupied == 2) {
             printf("%d: <deleted>\n", i);
-        }
-        else {
+        } else {
             printf("%d: <empty>\n", i);
         }
     }

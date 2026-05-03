@@ -69,8 +69,7 @@ void delete(char *key) {
 
             if (prev == NULL) {
                 hash_table[index] = current->next;
-            }
-            else {
+            } else {
                 prev->next = current->next;
             }
             free(current->key);
