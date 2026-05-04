@@ -43,6 +43,7 @@ int dequeue(struct LinkedList *linked_list) {
         printf("Nothing to dequeue: list is empty.\n");
         return -1;
     }
+
     if (linked_list->front == NULL) {
         printf("Nothing to dequeue: list is empty.\n");
         return -1;

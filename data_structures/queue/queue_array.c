@@ -40,8 +40,7 @@ int is_empty() {
     if (front == rear) {
         printf("Queue is empty.\n");
         return 0;
-    }
-    else {
+    } else {
         return -1;
     }
 }
@@ -50,8 +49,7 @@ int is_full() {
     if ((rear + 1) % MAX == front) { // if the result of rear + 1 % 10 == current value of front...
         printf("Queue is full.\n");
         return 0;
-    }
-    else {
+    } else {
         return -1;
     }
 }
