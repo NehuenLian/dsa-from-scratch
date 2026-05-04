@@ -33,11 +33,9 @@ struct Node* insert_node(struct Node *root, int value) {
 
     if (value < root->value) {
         root->left = insert_node(root->left, value);
-    } 
-    else if (value > root->value) {
+    } else if (value > root->value) {
         root->right = insert_node(root->right, value);
-    } 
-    else {
+    } else {
         printf("Value ignored cause its in the tree already: %d\n", value);
         return root;
     }
@@ -66,32 +64,22 @@ struct Node* delete_value(struct Node *root, int value) {
 
     if (value < root->value) {
         root->left = delete_value(root->left, value);
-    } 
-    else if (value > root->value) {
+    } else if (value > root->value) {
         root->right = delete_value(root->right, value);
     } else {
         // If left and right are NULL
         if (root->left == NULL && root->right == NULL) {
             free(root);
             return NULL;
-        }
-        
-        // If left is NULL take the right node
-        else if (root->left == NULL) {
+        } else if (root->left == NULL) { // If left is NULL take the right node
             struct Node *temp = root->right;
             free(root);
             return temp;
-        }
-
-        // If right is NULL take the left node
-        else if (root->right == NULL) {
+        } else if (root->right == NULL) { // If right is NULL take the left node
             struct Node *temp = root->left;
             free(root);
             return temp;
-        }
-
-        // If node has two children
-        else {
+        } else { // If node has two children
             struct Node *temp = min_value_node(root->right);
 
             root->value = temp->value;
@@ -118,8 +106,7 @@ struct Node* balance(struct Node *root) {
 
     if (left_height > right_height) {
         root->height = 1 + left_height;
-    } 
-    else {
+    } else {
         root->height = 1 + right_height;    
     }
     int factor = left_height - right_height;
@@ -127,16 +114,14 @@ struct Node* balance(struct Node *root) {
     if (factor >= 2) {
         if (height(root->left->left) >= height(root->left->right)) {
             root = rotate_right(root);
-        } 
-        else {
+        } else {
             root = rotate_left_right(root);
         }
 
     } else if (factor <= -2) {
         if (height(root->right->right) >= height(root->right->left)) {
             root = rotate_left(root);
-        } 
-        else {
+        } else {
             root = rotate_right_left(root);
         }
     }
@@ -156,8 +141,7 @@ int compute_height(struct Node *node) {
 
     if (left_height > right_height) {
         return 1 + left_height;
-    } 
-    else {
+    } else {
         return 1 + right_height;
     }
 }
@@ -180,8 +164,7 @@ struct Node* rotate_right(struct Node *root) {
 
     if (left_height > right_height) {
         root->height = 1 + left_height;
-    } 
-    else {
+    } else {
         root->height = 1 + right_height;
     }
 
@@ -191,8 +174,7 @@ struct Node* rotate_right(struct Node *root) {
 
     if (left_height > right_height) {
         root_left->height = 1 + left_height;
-    } 
-    else {
+    } else {
         root_left->height = 1 + right_height;
     }
 
@@ -212,8 +194,7 @@ struct Node* rotate_left(struct Node *root) {
 
     if (left_height > right_height) {
         root->height = 1 + left_height;
-    } 
-    else {
+    } else {
         root->height = 1 + right_height;
     }
 
@@ -222,8 +203,7 @@ struct Node* rotate_left(struct Node *root) {
 
     if (left_height > right_height) {
         root_right->height = 1 + left_height;
-    } 
-    else {
+    } else {
         root_right->height = 1 + right_height;
     }
 

@@ -25,8 +25,7 @@ struct Node* insert_node(int value, struct Node *root) {
     } 
     else if (value > root->value) {
         root->right = insert_node(value, root->right);
-    } 
-    else {
+    } else {
         printf("Duplicated value %d. Ignored.\n", value);
     }
     return root;
@@ -78,8 +77,7 @@ int get_value(struct Node *root, int value_to_search, int *store_value) {
 
     if (value_to_search < root->value) {
         return get_value(root->left, value_to_search, store_value);
-    } 
-    else if (value_to_search > root->value) {
+    } else if (value_to_search > root->value) {
         return get_value(root->right, value_to_search, store_value);
     }
     return -1;
@@ -103,33 +101,22 @@ struct Node* delete_value(struct Node *root, int value) {
 
     if (value < root->value) {
         root->left = delete_value(root->left, value);
-    }
-    else if (value > root->value) {
+    } else if (value > root->value) {
         root->right = delete_value(root->right, value);
-    } 
-    else {
+    } else {
         // If left and right are NULL (leaf node)
         if (root->left == NULL && root->right == NULL) {
             free(root);
             return NULL;
-        }
-
-        // If left == NULL we take the right node
-        else if (root->left == NULL) {
+        } else if (root->left == NULL) { // If left == NULL we take the right node
             struct Node *temp = root->right;
             free(root);
             return temp;
-        }
-
-        // If right == NULL we take the left node
-        else if (root->right == NULL) {
+        } else if (root->right == NULL) { // If right == NULL we take the left node
             struct Node *temp = root->left;
             free(root);
             return temp;
-        }
-
-        // If node has two children
-        else {
+        } else { // If node has two children
             struct Node* temp = min_value_node(root->right); // Find the min value in the right subtree
 
             root->value = temp->value; // Current node now has the value of the min node in the subtree
