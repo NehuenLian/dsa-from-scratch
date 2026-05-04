@@ -37,8 +37,7 @@ int insert_at_tail(struct LinkedList **linked_list, int value) {
         *linked_list = new_linked_list;
 
         return 0;
-    }
-    else {
+    } else {
         new_node->next = (*linked_list)->head;
         new_node->prev = (*linked_list)->tail;
 
@@ -75,8 +74,7 @@ int insert_at_head(struct LinkedList **linked_list, int value) {
         new_linked_list->head = new_node;
 
         return 0;
-    } 
-    else {
+    } else {
 
         new_node->next = (*linked_list)->head;
         new_node->prev = (*linked_list)->tail;
