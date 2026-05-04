@@ -22,8 +22,7 @@ int pop(int *last_element) {
         top = top - 1;
 
         return 0;
-    } 
-    else {
+    } else {
         printf("Couldn't pop element: the stack is empty.\n");
         return -1; // return -1 only for return an int
     }
